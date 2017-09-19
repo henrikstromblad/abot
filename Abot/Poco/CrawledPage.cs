@@ -1,5 +1,4 @@
-﻿using CsQuery;
-using HtmlAgilityPack;
+﻿using HtmlAgilityPack;
 using log4net;
 using System;
 using System.Collections.Generic;
@@ -18,14 +17,14 @@ namespace Abot.Poco
         HtmlParser _angleSharpHtmlParser;
 
         Lazy<HtmlDocument> _htmlDocument;
-        Lazy<CQ> _csQueryDocument;
+        //Lazy<CQ> _csQueryDocument;
         Lazy<IHtmlDocument> _angleSharpHtmlDocument;
 
         public CrawledPage(Uri uri)
             : base(uri)
         {
             _htmlDocument = new Lazy<HtmlDocument>(InitializeHtmlAgilityPackDocument);
-            _csQueryDocument = new Lazy<CQ>(InitializeCsQueryDocument);
+            //_csQueryDocument = new Lazy<CQ>(InitializeCsQueryDocument);
             _angleSharpHtmlDocument = new Lazy<IHtmlDocument>(InitializeAngleSharpHtmlParser);
 
             Content = new PageContent();
@@ -45,8 +44,8 @@ namespace Abot.Poco
         /// <summary>
         /// Lazy loaded CsQuery (https://github.com/jamietre/CsQuery) document that can be used to retrieve/modify html elements on the crawled page.
         /// </summary>
-        [Obsolete("CSQuery is no longer actively maintained. Use AngleSharpHyperlinkParser for similar usage/functionality")]
-        public CQ CsQueryDocument { get { return _csQueryDocument.Value;  } }
+        //[Obsolete("CSQuery is no longer actively maintained. Use AngleSharpHyperlinkParser for similar usage/functionality")]
+        //public CQ CsQueryDocument { get { return _csQueryDocument.Value;  } }
 
         /// <summary>
         /// Lazy loaded AngleSharp IHtmlDocument (https://github.com/AngleSharp/AngleSharp) that can be used to retrieve/modify html elements on the crawled page.
@@ -126,22 +125,25 @@ namespace Abot.Poco
             }
         }
 
-        private CQ InitializeCsQueryDocument()
-        {
-            CQ csQueryObject;
-            try
-            {
-                csQueryObject = CQ.Create(Content.Text);
-            }
-            catch (Exception e)
-            {
-                csQueryObject = CQ.Create("");
+        //private CQ InitializeCsQueryDocument()
+        //{
+        //    var document = AngleSharp.BrowsingContext.New(null). .New(config).OpenAsync(address);
 
-                _logger.ErrorFormat("Error occurred while loading CsQuery object for Url [{0}]", Uri);
-                _logger.Error(e);
-            }
-            return csQueryObject;
-        }
+        //    CQ csQueryObject;
+            
+        //    try
+        //    {
+        //        csQueryObject = CQ.Create(Content.Text);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        csQueryObject = CQ.Create("");
+
+        //        _logger.ErrorFormat("Error occurred while loading CsQuery object for Url [{0}]", Uri);
+        //        _logger.Error(e);
+        //    }
+        //    return csQueryObject;
+        //}
 
         private HtmlDocument InitializeHtmlAgilityPackDocument()
         {

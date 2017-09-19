@@ -14,17 +14,22 @@ namespace Abot.Tests.Unit.Core
         CrawledPage _goodPageResult;
         CrawledPage _badPageResult;
 
-        [TestFixtureSetUp]
-        public void TestFixtureSetup()
-        {
-            PageRequester pageRequster = new PageRequester(new CrawlConfiguration { UserAgentString = "aaa" });
-            _goodPageResult = pageRequster.MakeRequest(new Uri("http://localhost.fiddler:1111/"));
-            _badPageResult = pageRequster.MakeRequest(new Uri("http://localhost.fiddler:1111/HttpResponse/Status404"));
-        }
+        //[TestFixtureSource(]
+        //public void TestFixtureSetup()
+        //{
+        //    PageRequester pageRequster = new PageRequester(new CrawlConfiguration { UserAgentString = "aaa" });
+        //    _goodPageResult = pageRequster.MakeRequest(new Uri("http://localhost.fiddler:1111/"));
+        //    _badPageResult = pageRequster.MakeRequest(new Uri("http://localhost.fiddler:1111/HttpResponse/Status404"));
+        //}
 
         [SetUp]
         public void SetUp()
         {
+            PageRequester pageRequster = new PageRequester(new CrawlConfiguration { UserAgentString = "aaa" });
+            _goodPageResult = pageRequster.MakeRequest(new Uri("http://localhost.fiddler:1111/"));
+            _badPageResult = pageRequster.MakeRequest(new Uri("http://localhost.fiddler:1111/HttpResponse/Status404"));
+
+
             _fakePageRequester = new Mock<IPageRequester>();
             _uut = new RobotsDotTextFinder(_fakePageRequester.Object);
         }
