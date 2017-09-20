@@ -1,23 +1,18 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Abot</id>
+    <id>$id$</id>
     <version>$version$</version>
-    <title>Abot Web Crawler</title>
-    <authors>Steven Jones</authors>
-    <owners>SHARPDEV LLC</owners>
-    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
-    <projectUrl>https://github.com/sjdirect/abot</projectUrl>
-    <iconUrl>http://abotx.org/Content/images/logoicon.png</iconUrl>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</licenseUrl>
+    <projectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</projectUrl>
+    <iconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Abot is an open source C# web crawler built for speed and flexibility. It takes care of the low level plumbing (multithreading, http requests, scheduling, link parsing, etc..). You just register for events to process the page data. You can also plugin your own implementations of core interfaces to take complete control over the crawl process.</description>
-    <summary>Open source C# web crawler built for speed, flexibility and extensibility.</summary>
-    <releaseNotes>$version$ release notes may be found on https://github.com/sjdirect/abot</releaseNotes>
-    <copyright>Copyright 2012 SHARPDEV LLC</copyright>
-    <tags>crawler robot spider</tags>
+    <description>$description$</description>
+    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <copyright>Copyright 2016</copyright>
+    <tags>Tag1 Tag2</tags>
   </metadata>
-  <files>
-    <file src="bin\release\HtmlAgilityPack.dll" target="lib\net40\" />
-    <file src="bin\release\Abot.XML" target="lib\net40\" />
-  </files>
 </package>
