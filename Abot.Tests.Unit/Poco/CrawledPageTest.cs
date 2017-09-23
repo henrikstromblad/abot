@@ -152,64 +152,64 @@ namespace Abot.Tests.Unit.Poco
         //    Assert.AreEqual(4, unitUnderTest.CsQueryDocument.Length);
         //}
 
-        [Test]
-        public void AngleSharpDocument_RawContentIsNull_AngleSharpDocumentIsNotNull()
-        {
-            CrawledPage unitUnderTest = new CrawledPage(new Uri("http://a.com/"))
-            {
-                Content = new PageContent
-                {
-                    Text = null
-                }
-            };
+        //[Test]
+        //public void AngleSharpDocument_RawContentIsNull_AngleSharpDocumentIsNotNull()
+        //{
+        //    CrawledPage unitUnderTest = new CrawledPage(new Uri("http://a.com/"))
+        //    {
+        //        Content = new PageContent
+        //        {
+        //            Text = null
+        //        }
+        //    };
 
-            Assert.IsNotNull(unitUnderTest.AngleSharpHtmlDocument);
-        }
+        //    Assert.IsNotNull(unitUnderTest.AngleSharpHtmlDocument);
+        //}
 
-        [Test]
-        public void AngleSharpDocument_ToManyNestedTagsInSource1_DoesNotCauseStackOverflowException()
-        {
-            CrawledPage unitUnderTest = new CrawledPage(new Uri("http://a.com/"))
-            {
-                Content = new PageContent
-                {
-                    Text = GetFileContent("HtmlAgilityPackStackOverflow1.html")
-                }
-            };
+        //[Test]
+        //public void AngleSharpDocument_ToManyNestedTagsInSource1_DoesNotCauseStackOverflowException()
+        //{
+        //    CrawledPage unitUnderTest = new CrawledPage(new Uri("http://a.com/"))
+        //    {
+        //        Content = new PageContent
+        //        {
+        //            Text = GetFileContent("HtmlAgilityPackStackOverflow1.html")
+        //        }
+        //    };
 
-            Assert.IsNotNull(unitUnderTest.AngleSharpHtmlDocument);
-            Assert.IsTrue(unitUnderTest.AngleSharpHtmlDocument.ToString().Length > 1);
-        }
+        //    Assert.IsNotNull(unitUnderTest.AngleSharpHtmlDocument);
+        //    Assert.IsTrue(unitUnderTest.AngleSharpHtmlDocument.ToString().Length > 1);
+        //}
 
-        [Test]
-        public void AngleSharpDocument_ToManyNestedTagsInSource2_DoesNotCauseStackOverflowException()
-        {
-            CrawledPage unitUnderTest = new CrawledPage(new Uri("http://a.com/"))
-            {
-                Content = new PageContent
-                {
-                    Text = GetFileContent("HtmlAgilityPackStackOverflow2.html")
-                }
-            };
+        //[Test]
+        //public void AngleSharpDocument_ToManyNestedTagsInSource2_DoesNotCauseStackOverflowException()
+        //{
+        //    CrawledPage unitUnderTest = new CrawledPage(new Uri("http://a.com/"))
+        //    {
+        //        Content = new PageContent
+        //        {
+        //            Text = GetFileContent("HtmlAgilityPackStackOverflow2.html")
+        //        }
+        //    };
 
-            Assert.IsNotNull(unitUnderTest.AngleSharpHtmlDocument);
-            Assert.IsTrue(unitUnderTest.AngleSharpHtmlDocument.ToString().Length > 1);
-        }
+        //    Assert.IsNotNull(unitUnderTest.AngleSharpHtmlDocument);
+        //    Assert.IsTrue(unitUnderTest.AngleSharpHtmlDocument.ToString().Length > 1);
+        //}
 
-        [Test]
-        public void AngleSharp_EncodingChangedTwice_IsLoaded()
-        {
-            CrawledPage unitUnderTest = new CrawledPage(new Uri("http://a.com/"))
-            {
-                Content = new PageContent
-                {
-                    Text = @"<div>hehe</div><meta http-equiv=""Content-Type"" content=""text/html; charset=iso-8859-1""><meta http-equiv=""content-type"" content=""text/html; charset=utf-8"" /><div>hi</div>"
-                }
-            };
+        //[Test]
+        //public void AngleSharp_EncodingChangedTwice_IsLoaded()
+        //{
+        //    CrawledPage unitUnderTest = new CrawledPage(new Uri("http://a.com/"))
+        //    {
+        //        Content = new PageContent
+        //        {
+        //            Text = @"<div>hehe</div><meta http-equiv=""Content-Type"" content=""text/html; charset=iso-8859-1""><meta http-equiv=""content-type"" content=""text/html; charset=utf-8"" /><div>hi</div>"
+        //        }
+        //    };
 
-            Assert.IsNotNull(unitUnderTest.AngleSharpHtmlDocument);
-            Assert.AreEqual(7, unitUnderTest.AngleSharpHtmlDocument.All.Length);
-        }
+        //    Assert.IsNotNull(unitUnderTest.AngleSharpHtmlDocument);
+        //    Assert.AreEqual(7, unitUnderTest.AngleSharpHtmlDocument.All.Length);
+        //}
 
 
         [Test]

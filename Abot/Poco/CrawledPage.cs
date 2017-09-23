@@ -2,11 +2,11 @@
 using log4net;
 using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
+//using System.Collections.Specialized;
 using System.Net;
-using AngleSharp;
-using AngleSharp.Dom.Html;
-using AngleSharp.Parser.Html;
+//using AngleSharp;
+//using AngleSharp.Dom.Html;
+//using AngleSharp.Parser.Html;
 
 namespace Abot.Poco
 {
@@ -14,18 +14,18 @@ namespace Abot.Poco
     public class CrawledPage : PageToCrawl
     {
         ILog _logger = LogManager.GetLogger("AbotLogger");
-        HtmlParser _angleSharpHtmlParser;
+        //HtmlParser _angleSharpHtmlParser;
 
         Lazy<HtmlDocument> _htmlDocument;
         //Lazy<CQ> _csQueryDocument;
-        Lazy<IHtmlDocument> _angleSharpHtmlDocument;
+        //Lazy<IHtmlDocument> _angleSharpHtmlDocument;
 
         public CrawledPage(Uri uri)
             : base(uri)
         {
             _htmlDocument = new Lazy<HtmlDocument>(InitializeHtmlAgilityPackDocument);
             //_csQueryDocument = new Lazy<CQ>(InitializeCsQueryDocument);
-            _angleSharpHtmlDocument = new Lazy<IHtmlDocument>(InitializeAngleSharpHtmlParser);
+            //_angleSharpHtmlDocument = new Lazy<IHtmlDocument>(InitializeAngleSharpHtmlParser);
 
             Content = new PageContent();
         }
@@ -50,7 +50,7 @@ namespace Abot.Poco
         /// <summary>
         /// Lazy loaded AngleSharp IHtmlDocument (https://github.com/AngleSharp/AngleSharp) that can be used to retrieve/modify html elements on the crawled page.
         /// </summary>
-        public IHtmlDocument AngleSharpHtmlDocument { get { return _angleSharpHtmlDocument.Value; } }
+        //public IHtmlDocument AngleSharpHtmlDocument { get { return _angleSharpHtmlDocument.Value; } }
 
         /// <summary>
         /// Web request sent to the server
@@ -148,10 +148,17 @@ namespace Abot.Poco
         private HtmlDocument InitializeHtmlAgilityPackDocument()
         {
             HtmlDocument hapDoc = new HtmlDocument();
-            hapDoc.OptionMaxNestedChildNodes = 5000;//did not make this an externally configurable property since it is really an internal issue to hap
+            //hapDoc.OptionMaxNestedChildNodes = 5000;//did not make this an externally configurable property since it is really an internal issue to hap
             try
             {
                 hapDoc.LoadHtml(Content.Text);
+            }
+            catch(StackOverflowException e)
+            {
+                hapDoc.LoadHtml("");
+
+                _logger.ErrorFormat("StackOverflowException occurred while loading HtmlAgilityPack object for Url [{0}]", Uri);
+                _logger.Error(e);
             }
             catch (Exception e)
             {
@@ -163,25 +170,25 @@ namespace Abot.Poco
             return hapDoc;
         }
 
-        private IHtmlDocument InitializeAngleSharpHtmlParser()
-        {
-            if(_angleSharpHtmlParser == null)
-                _angleSharpHtmlParser = new HtmlParser();
+        //private IHtmlDocument InitializeAngleSharpHtmlParser()
+        //{
+        //    if(_angleSharpHtmlParser == null)
+        //        _angleSharpHtmlParser = new HtmlParser();
 
-            IHtmlDocument document;
-            try
-            {
-                document = _angleSharpHtmlParser.Parse(Content.Text);
-            }
-            catch (Exception e)
-            {
-                document = _angleSharpHtmlParser.Parse("");
+        //    IHtmlDocument document;
+        //    try
+        //    {
+        //        document = _angleSharpHtmlParser.Parse(Content.Text);
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        document = _angleSharpHtmlParser.Parse("");
 
-                _logger.ErrorFormat("Error occurred while loading AngularSharp object for Url [{0}]", Uri);
-                _logger.Error(e);
-            }
+        //        _logger.ErrorFormat("Error occurred while loading AngularSharp object for Url [{0}]", Uri);
+        //        _logger.Error(e);
+        //    }
 
-            return document;
-        }
+        //    return document;
+        //}
     }
 }
